@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+}
+
+model Department {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[]
+}
+
+model Office {
+  id            Int     @id @default(autoincrement())
+  name          String
+  latitude      Float
+  longitude     Float
+  radius_meters Int     @default(100)
+  address       String?
+  users         User[]
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String   @unique
+  password_hash  String
+  employee_code  String   @unique
+  phone          String?
+  avatar_url     String?
+  face_embedding Json?
+  join_date      DateTime @default(now())
+  status         String   @default("active") // active, inactive
+
+  role_id       Int
+  role          Role        @relation(fields: [role_id], references: [id])
+  department_id Int?
+  department    Department? @relation(fields: [department_id], references: [id])
+  office_id     Int?
+  office        Office?     @relation(fields: [office_id], references: [id])
+
+  attendances    Attendance[]
+  leave_quotas   LeaveQuota[]
+  leave_requests LeaveRequest[]
+  notifications  Notification[]
+}
+
+model Attendance {
+  id               Int      @id @default(autoincrement())
+  user_id          Int
+  user             User     @relation(fields: [user_id], references: [id])
+  check_type       String   // in, out
+  timestamp        DateTime @default(now())
+  latitude         Float
+  longitude        Float
+  distance_meters  Float?
+  mode             String   // normal, remote
+  photo_url        String?
+  face_match_score Float?
+  status           String   @default("approved") // approved, pending, rejected
+  reason           String?
+  approved_by      Int?
+  approved_at      DateTime?
+}
+
+model LeaveType {
+  id                   Int           @id @default(autoincrement())
+  name                 String
+  default_annual_quota Int
+  carry_over_allowed   Boolean       @default(false)
+  leave_quotas         LeaveQuota[]
+  leave_requests       LeaveRequest[]
+}
+
+model LeaveQuota {
+  id            Int       @id @default(autoincrement())
+  user_id       Int
+  user          User      @relation(fields: [user_id], references: [id])
+  leave_type_id Int
+  leave_type    LeaveType @relation(fields: [leave_type_id], references: [id])
+  year          Int
+  quota_days    Int
+  used_days     Int       @default(0)
+
+  @@unique([user_id, leave_type_id, year])
+}
+
+model LeaveRequest {
+  id             Int       @id @default(autoincrement())
+  user_id        Int
+  user           User      @relation(fields: [user_id], references: [id])
+  leave_type_id  Int
+  leave_type     LeaveType @relation(fields: [leave_type_id], references: [id])
+  start_date     DateTime
+  end_date       DateTime
+  total_days     Int
+  reason         String
+  attachment_url String?
+  status         String    @default("pending") // pending, approved, rejected
+  approved_by    Int?
+  approved_at    DateTime?
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  title      String
+  body       String
+  type       String   // info, approval, alert
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now())
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  actor_id   Int
+  action     String
+  entity     String
+  entity_id  Int
+  meta       Json?
+  created_at DateTime @default(now())
+}

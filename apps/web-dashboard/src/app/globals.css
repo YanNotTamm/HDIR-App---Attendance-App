@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #3b82f6;
+  --primary-glow: rgba(59, 130, 246, 0.3);
+  --secondary: #10b981;
+  --accent: #8b5cf6;
+  --surface: rgba(255, 255, 255, 0.8);
+  --surface-border: rgba(0, 0, 0, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-surface-border: var(--surface-border);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px var(--primary-glow);
+}
