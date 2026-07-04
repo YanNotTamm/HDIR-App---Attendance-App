@@ -1,7 +1,7 @@
 {
   "name": "@hdir/core",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "dependencies": {
     "axios": "^1.6.0",
     "date-fns": "^3.0.0"

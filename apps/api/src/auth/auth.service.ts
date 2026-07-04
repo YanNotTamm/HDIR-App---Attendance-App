@@ -11,7 +11,6 @@ export class AuthService {
       where: { email },
       include: {
         role: true,
-        employee: true,
       }
     });
 
@@ -30,8 +29,7 @@ export class AuthService {
           name: user.name,
           email: user.email,
           role: user.role.name,
-        },
-        employee: user.employee
+        }
       }
     };
   }

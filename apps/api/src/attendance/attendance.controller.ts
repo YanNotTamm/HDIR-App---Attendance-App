@@ -35,4 +35,16 @@ export class AttendanceController {
     // Only HR role should access this
     return this.attendanceService.getPendingRemote();
   }
+
+  @Post(':id/approve')
+  async approveRemote(@Param('id') id: string, @Body() body: any) {
+    const approvedBy = body.approvedBy || 1; // HR User ID
+    return this.attendanceService.approveRemote(parseInt(id), approvedBy);
+  }
+
+  @Post(':id/reject')
+  async rejectRemote(@Param('id') id: string, @Body() body: any) {
+    const approvedBy = body.approvedBy || 1; // HR User ID
+    return this.attendanceService.rejectRemote(parseInt(id), approvedBy);
+  }
 }
