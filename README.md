@@ -78,5 +78,20 @@ npx expo start -c
 
 ---
 
-## 📜 Lisensi
-Proyek ini dilisensikan di bawah **GNU General Public License v3.0**. Lihat file `LICENSE` untuk informasi lebih detail.
+## 📜 Lisensi & Kontribusi (Open Source GNU GPL v3.0)
+
+Aplikasi HDIR dirilis sebagai perangkat lunak **Open Source** di bawah lisensi **GNU General Public License v3.0**. 
+
+### Hak dan Ketentuan Lisensi:
+- **Kebebasan Mengembangkan**: Siapapun diperbolehkan untuk melakukan *fork*, mengubah kode sumber, menyesuaikan fitur, dan mengembangkan aplikasi ini lebih lanjut sesuai kebutuhan instansi atau personal.
+- **Distribusi Terbuka**: Jika Anda mengubah atau mendistribusikan ulang aplikasi ini, Anda wajib merilis kode sumber hasil modifikasi tersebut di bawah lisensi yang sama (Copyleft).
+- **Penggunaan Gratis**: Tidak ada biaya lisensi untuk menggunakan, memodifikasi, atau menyebarkan aplikasi ini.
+
+### Peluang Pengembangan Lebih Lanjut:
+Aplikasi ini sangat terbuka untuk dikembangkan lebih jauh, misalnya:
+- Mengintegrasikan sistem absensi dengan mesin sidik jari fisik.
+- Menambahkan modul slip gaji (*Payroll*) otomatis berdasarkan rekap absensi.
+- Memperluas deteksi kecerdasan buatan (Face AI) dengan fitur deteksi keaktifan (*Liveness Detection*) untuk mencegah pemalsuan foto.
+
+Kami sangat menyambut baik kontribusi berupa perbaikan *bug*, penambahan fitur, maupun dokumentasi. Silakan buat **Pull Request** atau buka **Issue** di repositori ini jika Anda menemukan kendala!
+
